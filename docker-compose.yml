@@ -11,3 +11,19 @@ services:
       - ./code:/code
     tty: true
     stdin_open: true
+    depends_on: 
+      - db
+
+  db:
+    container_name: drf_db
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: drf
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_ALLOW_EMPTY_PASSWORD: ‘yes’
+    volumes: 
+      - ./mysql:/var/lib/mysql
+    ports: 
+      - 33306:3306
